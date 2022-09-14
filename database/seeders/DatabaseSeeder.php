@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Comment;
+use App\Models\Ingredient;
+use App\Models\Recipe;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +24,29 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+
+        $this->call([
+            CategorySeeder::class,
+            FoodSeeder::class,
+            MesureSeeder::class,
+            SeasonSeeder::class,
+            DifficultySeeder::class
+        ]);
+
+        User::factory()
+            ->count(10)
+            ->has(
+                Recipe::factory()
+                    ->has(
+                        Ingredient::factory()
+                            ->count(rand(2, 6))
+                    )
+            )
+            ->has(
+                Comment::factory()
+                    ->count(rand(2, 8))
+            )
+            ->create();
     }
 }

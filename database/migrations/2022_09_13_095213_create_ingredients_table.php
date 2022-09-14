@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->timestamps();
 
+            $table->foreignId('recipe_id')->constrained();
             $table->foreignId('mesure_id')->constrained();
         });
     }

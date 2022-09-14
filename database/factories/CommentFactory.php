@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Recipe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'content' => $this->faker->sentences(rand(1, 2), true),
+            'rating' => rand(1, 5),
+            'recipe_id' => Recipe::all()->random()->id
         ];
     }
 }

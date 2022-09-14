@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Mesure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class IngredientFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'quantity' => rand(1, 100),
+            'mesure_id' => Mesure::all()->random()->id
         ];
     }
 }
