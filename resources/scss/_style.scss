@@ -1,0 +1,77 @@
+/* Colors */
+$light: #F8F8F8;
+$primary: #F4AC45;
+$dark-accent: #DB162F;
+$gray-100: #F8F9FA;
+$gray-200: #E9ECEF;
+$gray-300: #DEE2E6;
+$gray-400: #CED4DA;
+$gray-500: #ADB5BD;
+$gray-600: #6C757D;
+$gray-700: #495057;
+$gray-800: #343A40;
+$gray-900: #212529;
+
+/** Normalize **/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    color: $gray-900;
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 3.625rem;
+}
+
+h2 {
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+}
+
+h3 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    line-height: 1.813rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+h6 {
+    font-size: 1rem;
+    line-height: 1.188rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.lead {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+p {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.188rem;
+}
