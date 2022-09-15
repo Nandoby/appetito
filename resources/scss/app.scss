@@ -1,3 +1,143 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Italianno&display=swap');
+@import "bootstrap/scss/bootstrap-grid";
+@import "fontawesome/fontawesome";
+@import "fontawesome/solid";
+@import "fontawesome/brands";
 @import "style";
-@import "grid/grid";
+
+.logo {
+    width: 2rem;
+
+    &-anim {
+        transition: 300ms ease-in-out;
+        &:hover {
+            transform: scale(1.4)
+        }
+
+        &:focus {
+            transform: scale(1.4) translateY(-8px);
+        }
+    }
+}
+
+.text-logo {
+    font-family: "Italianno", cursive;
+    font-size: 2rem;
+}
+
+.flag {
+    opacity: 0.5;
+    transition: 300ms ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+#menu-bars {
+    font-size: 32px;
+    display: none;
+
+    @media (min-width: 100px) and (max-width: 992px) {
+        display: block;
+    }
+}
+
+@media (max-width: 992px) {
+    #auth {
+        display: none !important;
+    }
+}
+
+
+header {
+    background-color: $gray-200;
+
+    nav {
+        display: flex;
+        align-items: center;
+
+        #brand {
+            display: flex;
+            align-items: center;
+            flex: 0 1 8.3333%;
+            margin-right: 1rem;
+        }
+
+        form {
+            flex: 0 1 66.6667%;
+            margin-right: 1rem;
+            position: relative;
+
+            input {
+                padding-right: 40px !important;
+            }
+
+            &::after {
+                font-family: "Font Awesome 6 Pro", serif;
+                font-weight: 900;
+                content: "\f002";
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                color: $gray-700;
+
+            }
+        }
+
+        #auth {
+            display: flex;
+            align-items: center;
+            flex: 0 1 25%;
+        }
+
+        #menu-bars {
+            margin-left: 16px;
+            cursor: pointer;
+        }
+    }
+
+    input[type="search"] {
+        padding: 0.5rem;
+        border: 1px solid $gray-400;
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        color: $gray-900;
+        width: 100%;
+        border-radius: 4px;
+
+        &::placeholder {
+            color: $gray-700;
+        }
+
+        &:focus {
+            outline: 1px solid $gray-700;
+        }
+    }
+
+    ul {
+        li {
+            a.animate {
+                position: relative;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    background-color: $primary;
+                    width: 0;
+                    height: 2px;
+                    bottom: -8px;
+                    left: 0;
+                    right: 0;
+                }
+
+                &:hover:after {
+                    width: 100%;
+                    transition: 300ms ease-in-out;
+                }
+            }
+
+        }
+    }
+}
