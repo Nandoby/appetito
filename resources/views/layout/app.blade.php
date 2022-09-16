@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" href="favicon.ico">
     <title>Appetito | @yield('title')</title>
+    @yield('stylesheet')
     @vite('resources/scss/app.scss')
 </head>
 <body>
@@ -17,5 +18,6 @@
 @yield('content')
 
 @vite('resources/js/app.js')
+@yield('javascript')
 </body>
 </html>

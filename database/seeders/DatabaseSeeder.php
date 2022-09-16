@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Ingredient;
 use App\Models\Recipe;
 use App\Models\User;
@@ -48,5 +49,10 @@ class DatabaseSeeder extends Seeder
                     ->count(rand(2, 8))
             )
             ->create();
+
+        Image::factory()
+            ->count(10)
+            ->create();
+
     }
 }

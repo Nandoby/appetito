@@ -76,5 +76,14 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
+    public function getTimeAttribute($value)
+    {
+        $seconds = $value;
+
+        $seconds = round($seconds);
+        $output = sprintf('%02d h %02d m', ($seconds/3600), ($seconds/ 60 % 60));
+        return $output;
+    }
+
 
 }
