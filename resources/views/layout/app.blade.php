@@ -16,6 +16,7 @@
 
 @include('partials.header')
 @yield('content')
+@include('partials.footer')
 
 @vite('resources/js/app.js')
 @yield('javascript')

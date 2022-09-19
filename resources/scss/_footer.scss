@@ -1,0 +1,106 @@
+footer {
+    width: 100%;
+    background-color: $gray-900;
+    padding: 1px;
+
+    .container {
+
+        margin-top: 2.5rem;
+        margin-bottom: 2.5rem;&
+        > div {
+            display: flex;
+            margin-bottom: 2.5rem;
+
+
+
+            ul {
+                flex: 0 1 33.3333%;
+                //border: 1px solid red;
+                padding: 0 0.5rem;
+
+                &:first-child {
+                    padding: 0 0.5rem 0 0;
+                }
+
+                &:last-child {
+                    padding: 0 0 0 0.5rem;
+                }
+
+                li {
+                    margin: 0.5rem 0;
+                    color: $gray-500;
+                    font-size: 0.875rem;
+                }
+
+                i {
+                    margin-right: 0.5rem;
+                }
+
+                a {
+                    color: $gray-600;
+                    transition: all 300ms ease-in-out;
+                    display: inline-block;
+                    transform-origin: left top;
+
+                    &:hover {
+                        color: $gray-500;
+                        transform: scale(1.2);
+                    }
+                }
+            }
+
+            @media (max-width: 767px) {
+                flex-direction: column;
+
+                ul {
+                    padding: 0;
+
+                    flex: 0 1 100%;
+
+                    &:last-child {
+                        padding: 0;
+                    }
+
+                }
+            }
+
+        }
+
+
+        h6 {
+            color: $gray-500;
+            font-size: 0.875rem
+        }
+    }
+
+    .footer-branding {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+
+        div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+
+            > span {
+                font-family: "Italianno", cursive;
+                font-size: 2rem;
+                color: $gray-300;
+            }
+
+            + span {
+                color: $gray-300;
+            }
+        }
+
+
+
+        img {
+            width: 2rem;
+            margin-left: .5rem;
+        }
+    }
+}
