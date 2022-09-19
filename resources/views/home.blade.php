@@ -83,16 +83,53 @@
     <section id="last-recipes">
         <div class="container">
 
-            <h2>Dernières recettes</h2>
+            <h2 class="head-cursive">Dernières recettes</h2>
 
             <div class="cards">
 
 
                 @foreach ($lastRecipes as $recipe)
                     <div class="card">
-                        @if (count($recipe->images) > 0)
-                        <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
-                        @endif
+                        <a href="#">
+                            <div class="card-img-container">
+                                <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
+                            </div>
+                            <div class="card-body">
+                                <h6>{{ $recipe->category->name }}</h6>
+                                <h5>{{ $recipe->title }}</h5>
+                                <div class="card-infos">
+                                    <div>
+                                        <img src="{{ asset('icons/cookshat.svg') }}" alt="Cook's hat icon">
+                                        <span>{{ $recipe->difficulty->name }}</span>
+                                    </div>
+                                    <div>
+                                        <img src="{{ asset('icons/clock.svg') }}" alt="Clock icon">
+                                        <span>{{$recipe->time}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- End Last Recipes -->
+
+    <!-- Top Rated Section-->
+    <section id="top-rated">
+        <div class="container">
+            <h2 class="head-cursive">Les mieux notées</h2>
+            <div class="cards">
+                @foreach ($topRated as $recipe)
+                <div class="card">
+                    <a href="#">
+                        <div class="card-img-container">
+                            <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
+                        </div>
                         <div class="card-body">
                             <h6>{{ $recipe->category->name }}</h6>
                             <h5>{{ $recipe->title }}</h5>
@@ -107,15 +144,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
+                </div>
                 @endforeach
-
             </div>
-
         </div>
-
     </section>
-    <!-- End Last Recipes -->
+    <!-- End Top Rated Section -->
 @endsection
 
 @section('javascript')
