@@ -28,6 +28,39 @@
     }
 }
 
+.animate {
+    position: relative;
+
+    &:after {
+        content: "";
+        position: absolute;
+        background-color: $primary;
+        width: 0;
+        height: 2px;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+    }
+
+    &:hover:after {
+        width: 100%;
+        transition: 300ms ease-in-out;
+    }
+
+    &.active {
+        &:after {
+            content: "";
+            position: absolute;
+            background-color: $primary;
+            width: 100%;
+            height: 2px;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+        }
+    }
+}
+
 #menu-bars {
     font-size: 32px;
     display: none;
@@ -110,30 +143,6 @@ header {
         }
     }
 
-    ul {
-        li {
-            a.animate {
-                position: relative;
-
-                &:after {
-                    content: "";
-                    position: absolute;
-                    background-color: $primary;
-                    width: 0;
-                    height: 2px;
-                    bottom: -8px;
-                    left: 0;
-                    right: 0;
-                }
-
-                &:hover:after {
-                    width: 100%;
-                    transition: 300ms ease-in-out;
-                }
-            }
-
-        }
-    }
 }
 
 #nav-secondary {

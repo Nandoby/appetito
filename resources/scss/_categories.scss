@@ -1,0 +1,72 @@
+.container {
+    h1 {
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: $gray-900;
+    }
+
+    p {
+        width: 50%;
+        text-align: center;
+        margin: 0 auto 7rem auto;
+        line-height: 1.5;
+        color: $gray-900;
+
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+
+    .cards-cat {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 7rem;
+
+        .card {
+            flex: 0 1 33.3333%;
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem;
+            margin-bottom: 3rem;
+
+            h3 {
+                font-family: "Italianno", cursive;
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+                color: $gray-900;
+                font-weight: 400;
+                text-align: center;
+            }
+
+            img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 1rem;
+            }
+
+            .button {
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                margin-top: 1rem;
+                text-align: center;
+                background: $primary;
+                align-self: center;
+                font-weight: 700;
+
+                &:hover {
+                    background: darken($primary, 5);
+                }
+            }
+
+            @media (max-width: 991px) {
+                flex: 0 1 50%;
+            }
+
+            @media (max-width: 767px) {
+                flex: 0 1 100%;
+            }
+        }
+    }
+}

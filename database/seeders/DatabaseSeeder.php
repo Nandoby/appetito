@@ -43,6 +43,10 @@ class DatabaseSeeder extends Seeder
                         Ingredient::factory()
                             ->count(rand(2, 6))
                     )
+                    ->has(
+                        Image::factory()
+                        ->count(rand(2, 4))
+                    )
             )
             ->has(
                 Comment::factory()

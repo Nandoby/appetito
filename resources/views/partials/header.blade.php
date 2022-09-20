@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Route; @endphp
 <header class="p-6">
     <div class="container">
 
@@ -24,9 +25,12 @@
         <div class="container">
             <ul>
                 <li class="mr-4">
+                    <a class="animate {{ Route::is('home') ? 'active' : '' }}" href="/">Accueil</a>
+                </li>
+                <li class="mr-4">
                     <a class="mr-2" href="#">Recettes</a><i class="fa-solid fa-chevron-down text-red"></i>
                     <ul>
-                        <li><a href="#">Par Catégorie</a></li>
+                        <li><a href="{{ route('categories.index') }}">Par Catégorie</a></li>
                         <li><a href="#">Par Saison</a></li>
                         <li><a href="#" class="btn btn-primary">Proposer une recette</a></li>
                     </ul>
