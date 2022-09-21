@@ -31,7 +31,7 @@
                     <a class="mr-2" href="#">Recettes</a><i class="fa-solid fa-chevron-down text-red"></i>
                     <ul>
                         <li><a href="{{ route('categories.index') }}">Par Catégorie</a></li>
-                        <li><a href="#">Par Saison</a></li>
+                        <li><a href="{{ route('seasons.index') }}">Par Saison</a></li>
                         <li><a href="#" class="btn btn-primary">Proposer une recette</a></li>
                     </ul>
                 </li>

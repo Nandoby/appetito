@@ -9,7 +9,7 @@
         <h1>Recettes par Catégorie</h1>
         <p>
             Des milliers de recettes à essayer ! Mais par où commencer ? Pour vous aider à vous y retrouver, nous avons
-            rangé les recetts par catégorie.
+            rangé les recettes par catégorie.
         </p>
 
         <div class="cards-cat">

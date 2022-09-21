@@ -12,7 +12,7 @@
             </ul>
             <ul>
                 <li><h6>Idées recettes</h6></li>
-                <li><a href="#">Recettes de saison</a></li>
+                <li><a href="{{ route('seasons.index') }}">Recettes de saison</a></li>
                 <li><a href="#">Recettes par ingrédients</a></li>
                 <li><a href="#">Top des recettes</a></li>
                 <li><a href="#">Nouveautés</a></li>
