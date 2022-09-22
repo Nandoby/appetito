@@ -69,4 +69,41 @@
             }
         }
     }
+
+    .recipes {
+
+        .recipe {
+            width: 80%;
+            border-radius: 0.5rem;
+            border: 1px solid $gray-200;
+            max-height: 400px;
+            margin-bottom: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+
+            > a {
+                display: flex;
+                width: 100%;
+                height: 100%;
+
+                &:hover {
+                    box-shadow: $shadow-md;
+                }
+            }
+
+            img {
+                max-height: 400px;
+                width: 100%;
+                object-fit: cover;
+                flex: 0 1 33.3333%;
+                border-top-left-radius: 0.5rem;
+                border-bottom-left-radius: 0.5rem;
+            }
+
+            .recipe-body {
+                padding: 1.25rem;
+                flex: 0 1 66.6667%;
+            }
+        }
+    }
 }

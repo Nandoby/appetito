@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Recipe;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class CategoriesController extends Controller
@@ -17,5 +20,18 @@ class CategoriesController extends Controller
         return view('categories.index', [
             'categories' => $category::all()
         ]);
+    }
+
+    public function show(Category $category)
+    {
+
+
+        $recipes = Recipe::query()->whereRelation('category', 'name', $category->name)->get();
+
+
+        return view('categories.show', [
+            'recipes' => $recipes,
+        ]);
+
     }
 }

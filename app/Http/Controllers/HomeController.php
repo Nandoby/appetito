@@ -11,11 +11,6 @@ class HomeController extends Controller
     public function index()
     {
 
-
-//        $recipes = Recipe::with(['images' => function ($query) {
-//            $query->inRandomOrder();
-//        }])->get();
-
         $recipes = Recipe::with('images')
             ->take(6)
             ->get();

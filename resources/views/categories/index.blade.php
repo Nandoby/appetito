@@ -17,7 +17,7 @@
             <div class="card">
                 <h3>{{ ucfirst($category->name) }}</h3>
                 <img src="{{ asset('storage/images/'.$category->images->path)  }}" alt="">
-                <a class="button" href="#">Voir {{ $category->name }}</a>
+                <a class="button" href="{{ route('categories.show', ['category' => $category->name]) }}">Voir {{ $category->name }}</a>
             </div>
             @endforeach
         </div>
