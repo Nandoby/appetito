@@ -76,13 +76,20 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
-    public function getTimeAttribute($value)
+    public function getTimeAttribute($value): string
     {
         $seconds = $value;
 
         $seconds = round($seconds);
         $output = sprintf('%02d h %02d m', ($seconds/3600), ($seconds/ 60 % 60));
         return $output;
+    }
+
+    public function averageRatings(): string
+    {
+        $ratings = number_format($this->comments->avg('rating'), 2);
+
+        return $ratings;
     }
 
 
