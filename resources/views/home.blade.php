@@ -39,37 +39,37 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="http://127.0.0.1:8000/categories/apéritif">
                         <img src={{asset("icons/apero.svg")}} alt="Apéro">
                         <h4>Apéritifs</h4>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="http://127.0.0.1:8000/categories/entrée">
                         <img src={{asset("icons/entree.svg")}} alt="Entrée">
                         <h4>Entrées</h4>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="http://127.0.0.1:8000/categories/apéritif">
                         <img src={{asset("icons/plat.svg")}} alt="Plat">
                         <h4>Plats</h4>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="http://127.0.0.1:8000/categories/dessert">
                         <img src={{asset("icons/dessert.svg")}} alt="Dessert">
                         <h4>Desserts</h4>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="http://127.0.0.1:8000/categories/fromages">
                         <img src={{asset("icons/fromage.svg")}} alt="Fromage">
                         <h4>Fromages</h4>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="http://127.0.0.1:8000/categories/fruits">
                         <img src={{ asset("icons/fruit.svg") }} alt="Fruit">
                         <h4>Fruits</h4>
                     </a>

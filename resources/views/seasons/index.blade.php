@@ -1,6 +1,8 @@
 @extends('layout.app')
 
-@section('title') Saisons @endsection
+@section('title')
+    Saisons
+@endsection
 
 @section('content')
     <div class="container">
@@ -11,13 +13,14 @@
         </p>
         <div class="cards-cat">
 
-        @foreach ($seasons as $season)
+            @foreach ($seasons as $season)
                 <div class="card">
                     <h3>{{ str_replace("été", "Eté", ucfirst($season->name)) }}</h3>
                     <img src="{{ asset('storage/images/'.$season->image->path) }}" alt="">
-                    <a class="button" href="#">Recettes {{ $season->name }}</a>
+                    <a class="button"
+                       href="{{ route('seasons.show', ['saison' => $season->name]) }}">Recettes {{ $season->name }}</a>
                 </div>
-        @endforeach
+            @endforeach
         </div>
 
     </div>

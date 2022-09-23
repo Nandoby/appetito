@@ -19,4 +19,12 @@ class SeasonsController extends Controller
             'seasons' => $season::all()
         ]);
     }
+
+    public function show(Season $saison): View
+    {
+
+        return view('seasons.show', [
+            'season' => $saison
+        ]);
+    }
 }

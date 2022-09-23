@@ -35,3 +35,6 @@ Route::get('/categories/{category:name}', [CategoriesController::class, 'show'])
 
 Route::get('/saisons', [SeasonsController::class, 'index'])
     ->name('seasons.index');
+
+Route::get('/saisons/{saison:name}', [SeasonsController::class, 'show'])
+    ->name('seasons.show');
