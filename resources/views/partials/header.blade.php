@@ -36,9 +36,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="mr-2" href="">Ingrédients</a><i class="fa-solid fa-chevron-down text-red"></i>
+                    <a class="mr-2" href="#">Ingrédients</a><i class="fa-solid fa-chevron-down text-red"></i>
                     <ul>
-                        <li><a href="#">Par ordre alphabétique</a></li>
+                        <li><a href="{{ route('ingredients.index') }}">Par ordre alphabétique</a></li>
                     </ul>
                 </li>
             </ul>
