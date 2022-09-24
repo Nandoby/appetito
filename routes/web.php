@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\SeasonsController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,10 @@ Route::get('/saisons', [SeasonsController::class, 'index'])
 
 Route::get('/saisons/{saison:name}', [SeasonsController::class, 'show'])
     ->name('seasons.show');
+
+Route::get('/ingredients', [IngredientController::class, 'index'])
+    ->name('ingredients.index')
+;
+
+Route::get('/ingredients/{letter}', [IngredientController::class, 'show'])
+    ->name('ingredients.show');

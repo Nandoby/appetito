@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Food;
+use App\Models\Image;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -58,8 +59,26 @@ class FoodSeeder extends Seeder
             ['name' => 'yaourt'],
         ];
 
+        $images = [];
+        $index = 1;
+
+
         foreach ($foods as $food) {
             Food::create($food);
+
+            $images[] = [
+                'path' => str_replace(' ', '-', $food['name']) . '.jpg',
+                'imageable_id' => $index,
+                'imageable_type' => Food::class
+            ];
+
+            $index++;
         }
+
+        foreach ($images as $image) {
+            Image::create($image);
+        }
+
+
     }
 }

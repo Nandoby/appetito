@@ -29,10 +29,7 @@ class ImageFactory extends Factory
                 'id' => Recipe::all()->random()->id,
                 'type' => Recipe::class
             ],
-            [
-                'id' => Food::all()->random()->id,
-                'type' => Food::class
-            ]
+
         ]);
 
         return [
