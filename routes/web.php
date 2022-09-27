@@ -46,3 +46,6 @@ Route::get('/ingredients', [IngredientController::class, 'index'])
 
 Route::get('/ingredients/{letter}', [IngredientController::class, 'show'])
     ->name('ingredients.show');
+
+Route::get('/ingredients/{ingredient:name}/recipes', [IngredientController::class, 'showRecipes'])
+    ->name('ingredients.recipes');

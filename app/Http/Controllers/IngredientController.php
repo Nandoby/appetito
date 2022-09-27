@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\Ingredient;
+use App\Models\Recipe;
 use Illuminate\View\View;
 
 class IngredientController extends Controller
@@ -33,5 +34,24 @@ class IngredientController extends Controller
             'ingredients' => $ingredients,
             'letter' => $letter
         ]);
+    }
+
+    public function showRecipes(Food $ingredient)
+    {
+        $foods = $ingredient::with('ingredients')->get();
+
+
+        foreach ( $foods as $food) {
+            $ingredients = $food->ingredients;
+
+            foreach ($ingredients as $ingredient) {
+                dump($ingredient->recipes);
+            }
+
+        }
+
+
+
+//        return view('ingredients.showRecipes');
     }
 }
