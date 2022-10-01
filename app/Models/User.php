@@ -44,13 +44,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get the user's image
-     */
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
 
     /**
      * Get the user's recipes

@@ -23,9 +23,9 @@
             <div id="alpha-content">
                 @forelse ($ingredients as $ingredient)
                     <div class="ingredient">
-                        <a href="#">
+                        <a href="{{ route('ingredients.recipes', ['ingredient' => $ingredient->name]) }}">
                             <img src="{{ asset('storage/images/' . $ingredient->image->path) }}" alt="{{ $ingredient->name }}">
-                            <span>{{ $ingredient->name }}</span>
+                            <span><b>{{ $ingredient->name }}</b></span>
                         </a>
                     </div>
                 @empty

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SeasonsController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -28,24 +29,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
-Route::get('/categories', [CategoriesController::class, 'index'])
-    ->name('categories.index');
+/* Catégories */
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category:name}', [CategoriesController::class, 'show'])->name('categories.show');
 
-Route::get('/categories/{category:name}', [CategoriesController::class, 'show'])
-    ->name('categories.show');
+/* Saisons */
+Route::get('/saisons', [SeasonsController::class, 'index'])->name('seasons.index');
+Route::get('/saisons/{saison:name}', [SeasonsController::class, 'show'])->name('seasons.show');
 
-Route::get('/saisons', [SeasonsController::class, 'index'])
-    ->name('seasons.index');
+/* Ingrédients */
+Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
+Route::get('/ingredients/{letter}', [IngredientController::class, 'show'])->name('ingredients.show');
+Route::get('/ingredients/{ingredient:name}/recipes', [IngredientController::class, 'showRecipes'])->name('ingredients.recipes');
 
-Route::get('/saisons/{saison:name}', [SeasonsController::class, 'show'])
-    ->name('seasons.show');
-
-Route::get('/ingredients', [IngredientController::class, 'index'])
-    ->name('ingredients.index')
-;
-
-Route::get('/ingredients/{letter}', [IngredientController::class, 'show'])
-    ->name('ingredients.show');
-
-Route::get('/ingredients/{ingredient:name}/recipes', [IngredientController::class, 'showRecipes'])
-    ->name('ingredients.recipes');
+/* Recipes */
+Route::get('/recipes/{recipe:slug}', [RecipeController::class, 'index'])->name('recipes.index');

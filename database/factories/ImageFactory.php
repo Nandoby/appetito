@@ -22,10 +22,6 @@ class ImageFactory extends Factory
 
         $imageable = $this->faker->randomElement([
             [
-                'id' => User::all()->random()->id,
-                'type' => User::class
-            ],
-            [
                 'id' => Recipe::all()->random()->id,
                 'type' => Recipe::class
             ],

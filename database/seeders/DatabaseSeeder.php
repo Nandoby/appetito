@@ -8,6 +8,7 @@ use App\Models\Food;
 use App\Models\Image;
 use App\Models\Ingredient;
 use App\Models\Recipe;
+use App\Models\Step;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -46,7 +47,11 @@ class DatabaseSeeder extends Seeder
                     )
                     ->has(
                         Image::factory()
-                        ->count(rand(2, 4))
+                            ->count(rand(2, 4))
+                    )
+                    ->has(
+                        Step::factory()
+                            ->count(rand(1, 6))
                     )
             )
             ->has(

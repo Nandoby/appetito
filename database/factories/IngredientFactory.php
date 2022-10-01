@@ -31,7 +31,7 @@ class IngredientFactory extends Factory
     {
         return $this->afterCreating(function(Ingredient $ingredient){
             $foods = Food::all();
-            $ingredient->foods()->saveMany($foods);
+            $ingredient->foods()->save($foods->random());
         });
     }
 

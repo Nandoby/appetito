@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\Ingredient;
 use App\Models\Recipe;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class IngredientController extends Controller
@@ -38,20 +39,26 @@ class IngredientController extends Controller
 
     public function showRecipes(Food $ingredient)
     {
-        $foods = $ingredient::with('ingredients')->get();
+//        $recipes = DB::table('recipes')
+//            ->join('ingredients', 'recipes.id', '=', 'ingredients.id')
+//            ->join('food_ingredient', 'ingredients.id', '=', 'food_ingredient.ingredient_id')
+//            ->join('food', 'food_ingredient.food_id','=', 'food.id')
+//            ->where('food.name', '=', 'banane')
+//            ->get();
+
+        $recipes = Recipe
+            ::join('ingredients', 'recipes.id', '=', 'ingredients.id')
+            ->join('food_ingredient', 'ingredients.id', '=', 'food_ingredient.ingredient_id')
+            ->join('food', 'food_ingredient.food_id','=', 'food.id')
+            ->select('recipes.*')
+            ->where('food.name', '=', $ingredient->name)
+            ->get();
 
 
-        foreach ( $foods as $food) {
-            $ingredients = $food->ingredients;
 
-            foreach ($ingredients as $ingredient) {
-                dump($ingredient->recipes);
-            }
-
-        }
-
-
-
-//        return view('ingredients.showRecipes');
+        return view('ingredients.showRecipes', [
+            'recipes' => $recipes,
+            'ingredient' => $ingredient
+        ]);
     }
 }

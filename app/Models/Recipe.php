@@ -81,7 +81,7 @@ class Recipe extends Model
         $seconds = $value;
 
         $seconds = round($seconds);
-        $output = sprintf('%02d h %02d m', ($seconds/3600), ($seconds/ 60 % 60));
+        $output = str_replace('00 h','',sprintf('%02d h %02d m', ($seconds/3600), ($seconds/ 60 % 60)));
         return $output;
     }
 
@@ -90,6 +90,11 @@ class Recipe extends Model
         $ratings = number_format($this->comments->avg('rating'), 2);
 
         return $ratings;
+    }
+
+    public function steps(): HasMany
+    {
+        return $this->hasMany(Step::class);
     }
 
 
