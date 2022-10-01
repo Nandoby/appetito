@@ -126,7 +126,7 @@
             <div class="cards">
                 @foreach ($topRated as $recipe)
                 <div class="card">
-                    <a href="#">
+                    <a href="{{ route('recipes.index', ['recipe' => $recipe->slug]) }}">
                         <div class="card-img-container">
                             <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
                         </div>
