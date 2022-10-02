@@ -1,8 +1,5 @@
-@php
-    $recipeImg = $recipe->images[0]->path
-@endphp
 
-@extends('layout.app');
+@extends('layout.app')
 
 
 
@@ -13,6 +10,9 @@
 
 
 @section('content')
+    @php
+        $recipeImg = $recipe->images[0]->path
+    @endphp
     <section id="recipe">
         <div class="container">
             <h2>{{ $recipe->title }}</h2>
@@ -134,7 +134,7 @@
         const checkSrc = (images) => {
             images.forEach(image => {
                 image.style.opacity = "50%"
-                if (image.src == mainImage.src) {
+                if (image.src === mainImage.src) {
                     image.style.opacity = "100%"
                 }
             })

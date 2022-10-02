@@ -7,14 +7,15 @@
                 <span class="text-logo">Appetito</span>
                 <a href="/"><img src="{{ asset('icons/logo.svg') }}" alt="" class="logo"></a>
             </div>
-            <form>
-                <input type="search" placeholder="Recherche des recettes ou ingrédients ..."/>
+            <form action="{{ route('recipes.search') }}" method="GET">
+                <input autocomplete="off" type="search" name="recipe" placeholder="Recherche des recettes ou ingrédients ..." value="{{ isset($request) ? $request->input('recipe') : '' }}"/>
+                <button type="submit"><i class="fa-regular fa-magnifying-glass"></i></button>
             </form>
             <ul id="auth">
-                <li><a class="mr-4 animate" href="#">Connexion</a></li>
-                <li><a class="mr-4 animate" href="#">Inscription</a></li>
+                <li><a class="animate" href="#">Connexion</a></li>
+                <li><a class="animate" href="#">Inscription</a></li>
                 <li><a class="flag" href="#"><img src="{{ asset("icons/flag-FR.svg") }}" alt="Français"></a></li>
-                <li><a class="ml-4 flag" href="#"><img src={{ asset("icons/flag-IT.svg") }} alt="Italiano"></a></li>
+                <li><a class="flag" href="#"><img src={{ asset("icons/flag-IT.svg") }} alt="Italiano"></a></li>
             </ul>
             <i id="menu-bars" class="fa-solid fa-bars"></i>
         </nav>
@@ -28,7 +29,7 @@
                     <a class="animate {{ Route::is('home') ? 'active' : '' }}" href="/">Accueil</a>
                 </li>
                 <li class="mr-4">
-                    <a class="mr-2" href="#">Recettes</a><i class="fa-solid fa-chevron-down text-red"></i>
+                    <a href="#">Recettes</a><i class="fa-solid fa-chevron-down text-red"></i>
                     <ul>
                         <li><a href="{{ route('categories.index') }}">Par Catégorie</a></li>
                         <li><a href="{{ route('seasons.index') }}">Par Saison</a></li>
@@ -36,7 +37,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="mr-2" href="#">Ingrédients</a><i class="fa-solid fa-chevron-down text-red"></i>
+                    <a href="#">Ingrédients</a><i class="fa-solid fa-chevron-down text-red"></i>
                     <ul>
                         <li><a href="{{ route('ingredients.index') }}">Par ordre alphabétique</a></li>
                     </ul>
