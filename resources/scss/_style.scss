@@ -91,6 +91,9 @@ p {
 
 .error {
     color: red;
+    margin-top: 0.75rem;
+    display: block;
+    font-size: 0.85rem;
 }
 
 .text-red {
@@ -141,7 +144,6 @@ p {
 .btn {
     display: block;
     padding: 0.5rem 1rem !important;
-    border-radius: 0.25rem;
 
     &-primary {
         background-color: $primary;
@@ -293,4 +295,8 @@ p {
 
 .p-6 {
     padding: 1.5rem
+}
+
+.icon-color {
+    color: $primary;
 }

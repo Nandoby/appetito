@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeasonsController;
@@ -19,13 +20,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//
-//$categories = Category::all();
-//$cat = [];
-//
-//foreach ($categories as $category) {
-//    $cat[] = $category->name;
-//}
+
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
@@ -46,5 +41,10 @@ Route::get('/ingredients/{ingredient:name}/recipes', [IngredientController::clas
 /* Recipes */
 Route::get('/recipes/{slug}', [RecipeController::class, 'index'])->name('recipes.index');
 
-/** Search  */
+/* Search  */
 Route::get('/search', [SearchController::class, 'search'])->name('recipes.search');
+
+/* Authentication */
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
