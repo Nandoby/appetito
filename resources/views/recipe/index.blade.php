@@ -19,7 +19,15 @@
 
             <div class="top-gallery">
 
-               @include('partials.stars', ['recipe' => $recipe])
+                <span class="stars">
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $recipe->averageRatings())
+                            <i class="fa-solid fa-star"></i>
+                        @else
+                            <i class="fa-regular fa-star"></i>
+                        @endif
+                    @endfor
+</span>
 
                 <div class="top-comments">
                     <i class="fa-light fa-comments"></i>

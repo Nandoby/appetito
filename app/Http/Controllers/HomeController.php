@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Recipe;
+use Illuminate\Database\Eloquent\Builder;
 
 class HomeController extends Controller
 {
@@ -14,15 +15,16 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        $lastRecipes = Recipe::with('images')
+        $lastRecipes = Recipe::with('images', 'category', 'difficulty')
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
 
-        $topRated = Recipe::whereRelation('comments', 'rating', '>', 4 )
+        $topRated = Recipe::with(['comments' => function ($query) {
+            $query->orderBy('rating', 'desc');
+        }, 'category', 'difficulty', 'images'])
             ->take(3)
             ->get();
-
 
         return view('home', [
             'recipes' => $recipes,

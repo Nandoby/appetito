@@ -9,7 +9,7 @@
 
             <div class="recipes-container">
                 @forelse ($recipes as $recipe)
-                    <a class="recipe" href="{{ route('recipes.index', ['recipe' => $recipe->slug]) }}">
+                    <a class="recipe" href="{{ route('recipes.index', ['slug' => $recipe->slug]) }}">
                         <img src="{{ $recipe->images[0]->path }}" alt="">
                         <div class="recipe-title">{{ $recipe->title }}</div>
                     </a>

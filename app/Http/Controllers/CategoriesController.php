@@ -22,13 +22,13 @@ class CategoriesController extends Controller
         ]);
     }
 
-    public function show(Category $category)
+    public function show($category)
     {
 
-        $cat = Category::query()->where('name', $category->name)->first();
+        $cat = Category::query()->where('name', $category)->first();
 
-        $recipes = Recipe::query()->whereRelation('category', 'name', $category->name)->get();
-
+        $recipes = Recipe::with('comments', 'category')
+            ->whereRelation('category', 'name', $category)->get();
 
         return view('categories.show', [
             'recipes' => $recipes,

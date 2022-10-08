@@ -32,7 +32,7 @@ Route::get('/', [HomeController::class, 'index'])
 
 /* Catégories */
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
-Route::get('/categories/{category:name}', [CategoriesController::class, 'show'])->name('categories.show');
+Route::get('/categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
 
 /* Saisons */
 Route::get('/saisons', [SeasonsController::class, 'index'])->name('seasons.index');
@@ -44,7 +44,7 @@ Route::get('/ingredients/{letter}', [IngredientController::class, 'show'])->name
 Route::get('/ingredients/{ingredient:name}/recipes', [IngredientController::class, 'showRecipes'])->name('ingredients.recipes');
 
 /* Recipes */
-Route::get('/recipes/{recipe:slug}', [RecipeController::class, 'index'])->name('recipes.index');
+Route::get('/recipes/{slug}', [RecipeController::class, 'index'])->name('recipes.index');
 
 /** Search  */
 Route::get('/search', [SearchController::class, 'search'])->name('recipes.search');

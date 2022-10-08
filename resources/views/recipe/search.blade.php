@@ -7,7 +7,7 @@
         <div class="recipes">
             @forelse($recipes as $recipe)
                 <div class="recipe">
-                    <a href="{{ route('recipes.index', ['recipe' => $recipe->slug]) }}">
+                    <a href="{{ route('recipes.index', ['slug' => $recipe->slug]) }}">
                         <img src="{{ $recipe->images[0]->path }}" alt="{{ $recipe->title }}">
                         <h5>{{ $recipe->title }}</h5>
                         <span class="stars">
