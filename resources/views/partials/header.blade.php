@@ -16,7 +16,7 @@
             <ul id="auth">
                 @guest()
                     <li><a class="animate" href="{{ route('login') }}">Connexion</a></li>
-                    <li><a class="animate" href="#">Inscription</a></li>
+                    <li><a class="animate" href="{{ route('register') }}">Inscription</a></li>
                 @endguest
                 @auth()
                     <li class="auth">

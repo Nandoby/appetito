@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layout.app')
 
 @section('title')
@@ -5,6 +6,11 @@
 @endsection
 
 @section('content')
+    @if (\Illuminate\Support\Facades\Session::has('emailVerified'))
+        <div class="alert-success">
+            Bienvenue {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}, {{ Session::get('emailVerified') }}
+        </div>
+    @endif
     <!-- Gallery -->
     <div class="glide">
         <div class="glide__track" data-glide-el="track">
@@ -125,27 +131,27 @@
             <h2 class="head-cursive">Les mieux notées</h2>
             <div class="cards">
                 @foreach ($topRated as $recipe)
-                <div class="card">
-                    <a href="{{ route('recipes.index', ['slug' => $recipe->slug]) }}">
-                        <div class="card-img-container">
-                            <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
-                        </div>
-                        <div class="card-body">
-                            <h6>{{ $recipe->category->name }}</h6>
-                            <h5>{{ $recipe->title }}</h5>
-                            <div class="card-infos">
-                                <div>
-                                    <img src="{{ asset('icons/cookshat.svg') }}" alt="Cook's hat icon">
-                                    <span>{{ $recipe->difficulty->name }}</span>
-                                </div>
-                                <div>
-                                    <img src="{{ asset('icons/clock.svg') }}" alt="Clock icon">
-                                    <span>{{$recipe->time}}</span>
+                    <div class="card">
+                        <a href="{{ route('recipes.index', ['slug' => $recipe->slug]) }}">
+                            <div class="card-img-container">
+                                <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
+                            </div>
+                            <div class="card-body">
+                                <h6>{{ $recipe->category->name }}</h6>
+                                <h5>{{ $recipe->title }}</h5>
+                                <div class="card-infos">
+                                    <div>
+                                        <img src="{{ asset('icons/cookshat.svg') }}" alt="Cook's hat icon">
+                                        <span>{{ $recipe->difficulty->name }}</span>
+                                    </div>
+                                    <div>
+                                        <img src="{{ asset('icons/clock.svg') }}" alt="Clock icon">
+                                        <span>{{$recipe->time}}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </div>

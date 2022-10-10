@@ -8,7 +8,9 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeasonsController;
 use App\Models\Category;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +50,24 @@ Route::get('/search', [SearchController::class, 'search'])->name('recipes.search
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/register', [LoginController::class, 'create'])->name('register.create');
+
+/* Verification by Email */
+Route::get('/email/verify', function () {
+    return view('authentication.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+/* Confirmation */
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('home')->with('emailVerified', 'votre compte a bien été activé');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+/** Resend email verification */
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Demande de verification envoyée');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

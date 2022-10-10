@@ -11,7 +11,7 @@
                 <img src="{{ asset('storage/images/login-background.jpg') }}" alt="">
                 <div class="login-body">
                     <h4>Connexion</h4>
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('login.authenticate') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="email">Email</label>
