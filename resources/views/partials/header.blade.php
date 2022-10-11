@@ -22,6 +22,7 @@
                     <li class="auth">
                         <img class="picture" src="{{ str_contains(Auth::user()->picture, 'http') ? Auth::user()->picture : asset('storage/images/'.Auth::user()->picture) }}">
                         <i class="profile-chevron fa-regular fa-chevron-down"></i>
+                        <span class="ml-2">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         <ul class="submenu">
                             <li><a href="#"><i class="fa-solid fa-user"></i>Voir profil</a></li>
                             <li><a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>

@@ -1,0 +1,33 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    li {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover:not(.disabled) {
+            background-color: lighten($primary, 20);
+
+
+        }
+
+        &.active {
+            background-color: $primary;
+
+        }
+
+        &.disabled {
+            color: $gray-500;
+
+        }
+
+
+    }
+}

@@ -1,4 +1,4 @@
-
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layout.app')
 
 
@@ -14,6 +14,11 @@
         $recipeImg = $recipe->images[0]->path
     @endphp
     <section id="recipe">
+        @if (Session::has('success'))
+            <div class="alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
         <div class="container">
             <h2>{{ $recipe->title }}</h2>
 
@@ -89,8 +94,8 @@
         <div id="comments">
             <div class="container">
 
-                <h5>Commentaires ({{ $recipe->comments->count() }})</h5>
-                @foreach ($recipe->comments as $comment)
+                <h5>Commentaires ({{ $recipe->comments()->count() }})</h5>
+                @foreach ($comments as $comment)
                     <div class="comment-body">
 
                         <div class="user">
@@ -113,20 +118,69 @@
                     <hr>
 
                 @endforeach
+                {{ $comments->links('pagination.default') }}
 
             </div>
 
             @auth()
-                Veuillez vous connecter
+                @if (Auth::user()->email_verified_at)
+                    <section id="add-comment">
+                        <div class="container">
+                            <h5>Ajouter un commentaire</h5>
+
+                            <form action="{{ route('comments.create') }}" method="POST">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label for="comment">Votre commentaire</label>
+                                    <textarea class="@error('comment') is-invalid @enderror" id="comment" name="comment"></textarea>
+                                    @error('comment') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="rating">Note </label>
+                                    <select id="rating" name="rating" class="@error('rating') is-invalid @enderror">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    @error('rating') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+
+                                <button type="submit">Envoyer</button>
+
+                            </form>
+                        </div>
+
+                    </section>
+
+                @else
+
+                    <div class="alert-warning">
+                        <div class="container">
+                            Vous ne pouvez pas ajouter de commentaires tant que votre compte n'a pas été validé.
+                            Veuillez confirmer votre compte en cliquant dans le lien qui vous a été envoyé à votre
+                            adresse e-mail : <b>{{ Auth::user()->email }}</b>. <br>
+                            Vous pouvez également demander une nouvelle confirmation <a
+                                style="text-decoration: underline; font-weight:700"
+                                href="{{ route('verification.notice') }}">ici</a>
+                        </div>
+
+                    </div>
+                @endif
+
             @endauth
 
 
         </div>
         @guest()
+
             <div class="not-connected">
                 <div class="container">
-                    <span>Si vous désirez laisser un commentaire, nous vous prions de bien vouloir
-                    <a href="#">vous connecter</a>.</span>
+                        <span>Si vous désirez laisser un commentaire, nous vous prions de bien vouloir
+                        <a href="{{ route('login') }}">vous connecter</a>.</span>
                 </div>
             </div>
         @endguest
@@ -138,6 +192,19 @@
     <script>
         const mainImage = document.querySelector('.images-container img')
         const imagesList = document.querySelectorAll('.thumbs img')
+        const ratingLabel = document.querySelector('#add-comment label[for="rating"]')
+        const selectRating = document.querySelector('select#rating')
+
+        ratingLabel.innerText = "Note 1 / 5"
+
+
+        const changeRating = (e) => {
+            const value = e.target.value
+            ratingLabel.innerText = `Note ${value} / 5`
+        }
+
+        selectRating.addEventListener('input', changeRating)
+
 
         const checkSrc = (images) => {
             images.forEach(image => {

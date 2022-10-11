@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\LoginController;
@@ -52,6 +53,9 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login.aut
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/register', [LoginController::class, 'create'])->name('register.create');
+
+/* Comments */
+Route::post('/comments/create', [CommentController::class, 'create'])->name('comments.create');
 
 /* Verification by Email */
 Route::get('/email/verify', function () {

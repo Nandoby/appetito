@@ -177,7 +177,7 @@
 
     #comments {
         background: $gray-100;
-        padding: 2rem 0;
+        padding: 2rem 0 0 0;
 
         h5 {
             margin-bottom: 2rem;
@@ -251,4 +251,59 @@
     }
 
 
+}
+
+#add-comment {
+
+    background-color: $gray-200;
+    margin-top: 2rem;
+    padding: 2rem 0;
+
+    h5 {
+        text-align: center;
+    }
+
+    form {
+        label {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            resize: none;
+            border: 1px solid $gray-500;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 1rem;
+            font-family: "Inter", sans-serif;
+            color: $gray-900;
+        }
+
+        select {
+            width: 100%;
+            max-width: 10rem;
+            padding: 0.5rem;
+            border: 1px solid $gray-500;
+            border-radius: 0.5rem;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            background-color: $primary;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: all 300ms ease-in-out;
+
+            &:hover {
+                background-color: lighten($primary, 5);
+            }
+        }
+    }
 }

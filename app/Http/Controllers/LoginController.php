@@ -77,13 +77,14 @@ class LoginController extends Controller
 
             $picture = $request->file('picture');
             $path = Storage::disk('public')->put('images', $picture);
+            $filename = str_replace('images/', '', $path);
 
             $user = User::create([
                 'firstname' => $request->input('firstName'),
                 'lastname' => $request->input('lastName'),
                 'email' => $request->input('email'),
                 'password' => $passwordHashed,
-                'picture' => $path
+                'picture' => $filename
             ]);
         } else {
             $user = User::create([
