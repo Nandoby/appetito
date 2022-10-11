@@ -195,16 +195,17 @@
         const ratingLabel = document.querySelector('#add-comment label[for="rating"]')
         const selectRating = document.querySelector('select#rating')
 
-        ratingLabel.innerText = "Note 1 / 5"
+        if (ratingLabel) {
 
+            ratingLabel.innerText = "Note 1 / 5"
 
-        const changeRating = (e) => {
-            const value = e.target.value
-            ratingLabel.innerText = `Note ${value} / 5`
+            const changeRating = (e) => {
+                const value = e.target.value
+                ratingLabel.innerText = `Note ${value} / 5`
+            }
+
+            selectRating.addEventListener('input', changeRating)
         }
-
-        selectRating.addEventListener('input', changeRating)
-
 
         const checkSrc = (images) => {
             images.forEach(image => {
