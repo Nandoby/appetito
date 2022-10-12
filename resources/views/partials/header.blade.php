@@ -49,7 +49,7 @@
                     <ul>
                         <li><a href="{{ route('categories.index') }}">Par Catégorie</a></li>
                         <li><a href="{{ route('seasons.index') }}">Par Saison</a></li>
-                        <li><a href="#" class="btn btn-primary">Proposer une recette</a></li>
+                        <li><a href="{{ route('recipe.create') }}" class="btn btn-primary">Proposer une recette</a></li>
                     </ul>
                 </li>
                 <li>

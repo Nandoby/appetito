@@ -43,6 +43,11 @@ Route::get('/ingredients/{ingredient:name}/recipes', [IngredientController::clas
 
 /* Recipes */
 Route::get('/recipes/{slug}', [RecipeController::class, 'index'])->name('recipes.index');
+Route::get('/recipe/create', [RecipeController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('recipe.create');
+Route::post('/recipe/create/step1', [RecipeController::class, 'validateAjax1'])->name('recipe.validateAjax1');
+Route::post('/recipe/create/step2', [RecipeController::class, 'validateAjax2'])->name('recipe.validateAjax2');
 
 /* Search  */
 Route::get('/search', [SearchController::class, 'search'])->name('recipes.search');
