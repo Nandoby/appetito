@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class RecipeController extends Controller
 {
@@ -55,7 +56,7 @@ class RecipeController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => ['required'],
+            'title' => ['required', 'unique:recipes,title'],
             'time' => ['required'],
             'category' => ['required', 'in:1,2,3,4,5,6'],
             'difficulty' => ['required', 'in:1,2,3'],
@@ -64,7 +65,7 @@ class RecipeController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()
-            ], 400);
+            ], 422);
         }
 
         return response()->json('success', 200);
@@ -83,14 +84,73 @@ class RecipeController extends Controller
         $validator = Validator::make($request->all(), [
            'season' => ['required','in:1,2,3,4'],
             'food.*' => ['required', Rule::in($idFoods)],
+            'quantity.*' => ['required', 'numeric'],
+            'mesure.*' => ['required', 'in:1,2,3,4,5,6']
+
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()
-            ], 400);
+            ], 422);
         }
 
         return response()->json('success', 200);
+    }
+
+    public function validateAjax3(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'step.*' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        return response()->json('success');
+    }
+
+    public function validateAjax4(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image.*' => ['mimes:jpg,png,bmp', File::image()->max(2000)]
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        return response()->json('success');
+    }
+
+    public function store(Request $request)
+    {
+
+        $title = $request->input('title');
+        $time = $request->input('time');
+        $categoryID = $request->input('category');
+        $difficultyID = $request->input('difficulty');
+        $seasonID = $request->input('season');
+        $foodsID = $request->input('food');
+        $quantities = $request->input('quantity');
+        $mesuresID = $request->input('mesure');
+        $steps = $request->input('step');
+        $images = $request->file('image');
+
+        $recipe = new Recipe();
+        $recipe->title = $title;
+        $recipe->category()->associate($categoryID);
+        $recipe->difficulty()->associate($difficultyID);
+        $recipe->season()->associate($seasonID);
+
+
+        dd($quantities);
+
+
     }
 }

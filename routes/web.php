@@ -46,8 +46,13 @@ Route::get('/recipes/{slug}', [RecipeController::class, 'index'])->name('recipes
 Route::get('/recipe/create', [RecipeController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('recipe.create');
+
+/* Ajax validation */
 Route::post('/recipe/create/step1', [RecipeController::class, 'validateAjax1'])->name('recipe.validateAjax1');
 Route::post('/recipe/create/step2', [RecipeController::class, 'validateAjax2'])->name('recipe.validateAjax2');
+Route::post('/recipe/create/step3', [RecipeController::class, 'validateAjax3'])->name('recipe.validateAjax3');
+Route::post('/recipe/create/step4', [RecipeController::class, 'validateAjax4'])->name('recipe.validateAjax4');
+Route::post('/recipe/store', [RecipeController::class, 'store'])->name('recipe.store');
 
 /* Search  */
 Route::get('/search', [SearchController::class, 'search'])->name('recipes.search');

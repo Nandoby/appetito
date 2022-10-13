@@ -9,8 +9,8 @@
         <div class="container">
             <h1>Ajouter une recette</h1>
 
-            <form action="" method="POST">
-
+            <form id="myForm" action="{{ route('recipe.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <!-- Step 1 -->
                 <div data-step="1">
 
@@ -92,6 +92,7 @@
                                     <div class="col-md-4">
                                         <label for="quantity">Quantité</label>
                                         <input type="number" name="quantity[]" id="quantity"/>
+                                        <div class="error"></div>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="mesure">Unité de mesure</label>
@@ -100,12 +101,11 @@
                                                 <option value="{{ $mesure->id }}">{{ $mesure->name }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="error"></div>
                                     </div>
                                 </div>
-
-
                             </div>
-                            <button id="add-ingredient"><i class="fa-sharp fa-solid fa-plus"></i> Ajouter un ingrédient</button>
+                            <button class="mb-3" id="add-ingredient"><i class="fa-sharp fa-solid fa-plus"></i> Ajouter un ingrédient</button>
 
                         </div>
                     </div>
@@ -113,8 +113,43 @@
                 </div>
                 <!-- End Step 2 -->
 
-                <button id="prev">Précédent</button>
-                <button id="next">Suivant</button>
+                <!-- Step 3 -->
+                <div data-step="3">
+                    <h5 class="mb-3">Etapes</h5>
+                    <div id="step-row">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="step">Etape <span id="step-number">1</span></label>
+                                <textarea id="step" name="step[]"></textarea>
+                                <div class="error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="add-step" class="mb-3">Ajouter étape</button>
+                </div>
+                <!-- End Step 3 -->
+
+                <!-- Step 4 -->
+                <div data-step="4">
+                    <h5 class="mb-3">Images</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="js-label" for="image">
+                                <img src="{{ asset('storage/images/default-upload-image.jpg') }}" height="400" alt="image" />
+                            </label>
+                            <input type="file" id="image" name="image[]" />
+                            <div class="error mb-3"></div>
+                        </div>
+                        <div id="add-more" class="col-md-4">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Step 4 -->
+
+                <button class="mb-3" id="prev">Précédent</button>
+                <button class="mb-3" id="next">Suivant</button>
             </form>
         </div>
     </section>
@@ -127,9 +162,33 @@
         const nextButton = document.querySelector('button#next')
         const prevButton = document.querySelector('button#prev')
         const addButton = document.querySelector('button#add-ingredient')
+        const addStepButton = document.querySelector('button#add-step')
         const ingredientRow = document.querySelector('#ingredient-row')
+        const stepRow = document.querySelector('#step-row')
         const token = "{{ csrf_token() }}"
+        const addImageButton = document.querySelector('#add-more')
+        const myForm = document.querySelector('#myForm')
         let step = 1;
+
+        const showImage = () => {
+            const inputFile = document.querySelectorAll('input[name="image[]"]')
+
+            inputFile.forEach((input, key) => {
+                const label = input.previousElementSibling
+                label.setAttribute('for', `image-${key}`)
+                const image = label.querySelector('img')
+                input.id = `image-${key}`
+
+
+                input.addEventListener('change', (e) => {
+
+                    const url = window.URL.createObjectURL(e.currentTarget.files[0])
+                    image.src = url
+
+                })
+            })
+        }
+        showImage()
 
         const showStep = () => {
             stepDiv.forEach(div => {
@@ -153,6 +212,8 @@
 
         const nextStep = (e) => {
 
+            console.log(step)
+
             e.preventDefault()
 
             const title = document.querySelector('input[name="title"]').value
@@ -161,12 +222,17 @@
             const category = document.querySelector('select[name="category"]').value
             const season = document.querySelector('select[name="season"]').value
             const foods = document.querySelectorAll('select[name="food[]"]')
+            const quantities = document.querySelectorAll('input[name="quantity[]"]')
+            const mesures = document.querySelectorAll('select[name="mesure[]"]')
+            const steps = document.querySelectorAll('textarea[name="step[]"]')
+            const images = document.querySelectorAll('input[name="image[]"]')
             const foodsValues = []
+            const quantitiesValues = []
+            const mesuresValues = []
+            const stepsValues = []
+            const imagesPaths = []
 
-            foods.forEach(food => {
-                foodsValues.push(food.value)
-            })
-
+            // Functions
             const showErrors = (label, data, type, multiple = null) => {
 
                 if (multiple) {
@@ -189,8 +255,7 @@
                 }
 
             }
-
-            const hideErrors = (label, type, multiple = null) => {
+            const hideErrors = (label, type, multiple = null) =>     {
 
                 if (multiple) {
                     const divs = document.querySelectorAll(type + '[name="'+label+'[]"] + div')
@@ -203,25 +268,39 @@
                 }
 
             }
-
-            if (step == 1) {
-                fetch('/recipe/create/step1', {
-                    method: 'post',
+            const postData = async (url, data = {}, contentType = 'application/json') => {
+                const response = await fetch(url, {
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': contentType,
                         'Accept': 'application/json',
                         'X-CSRF-TOKEN': token
                     },
-                    body: JSON.stringify({
-                        title,
-                        time,
-                        difficulty,
-                        category,
-                    })
+                    body: JSON.stringify(data)
                 })
-                    .then(response => response.json())
-                    .then(data => {
 
+                return response.json()
+            }
+            // End Functions
+
+            foods.forEach(food => {
+                foodsValues.push(food.value)
+            })
+            quantities.forEach(quant => {
+                quantitiesValues.push(quant.value)
+            })
+            mesures.forEach(mesure => {
+                mesuresValues.push(mesure.value)
+            })
+            steps.forEach(step => {
+                stepsValues.push(step.value)
+            })
+
+
+
+            if (step == 1) {
+                postData('/recipe/create/step1', {title,time,difficulty,category})
+                    .then(data => {
                         console.log(data)
 
                         // If validator fails
@@ -231,7 +310,6 @@
                             showErrors('category', data, 'select')
                             showErrors('difficulty', data, 'select')
                         }
-
 
                         if (data == "success") {
                             hideErrors('time', 'input')
@@ -247,35 +325,27 @@
             }
 
             if (step == 2) {
-                fetch('/recipe/create/step2', {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': token
-                    },
-                    body: JSON.stringify({
-                        season,
-                        food: foodsValues
-
-                    })
+                postData('/recipe/create/step2', {
+                    season,
+                    food: foodsValues,
+                    quantity: quantitiesValues,
+                    mesure: mesuresValues
                 })
-                    .then(response => response.json())
                     .then(data => {
-
-                        console.log(data)
 
                         // If validator fails
                         if (data.errors) {
                             showErrors('season', data, 'select')
                             showErrors('food', data, 'select', true)
-
+                            showErrors('quantity', data, 'input', true)
+                            showErrors('mesure', data, 'select', true)
                         }
 
                         if (data == "success") {
                             hideErrors('season', 'select')
                             hideErrors('food', 'select', true)
-
+                            hideErrors('quantity', 'input', true)
+                            hideErrors('mesure', 'select', true)
 
                             step++
                             showStep()
@@ -284,7 +354,58 @@
                     })
             }
 
+            if (step == 3) {
+                postData('/recipe/create/step3', {
+                    step: stepsValues
+                })
+                    .then(data => {
 
+                        // If validator fails
+                        if (data.errors) {
+                            showErrors('step', data, 'textarea', true)
+                        }
+
+                        if (data == "success") {
+                            hideErrors('step', 'textarea', true)
+
+                            step++
+                            showStep()
+                        }
+                    })
+            }
+
+            if (step == 4) {
+
+                const data = new FormData()
+
+                images.forEach(image => {
+                    data.append('image[]', image.files[0])
+                })
+
+                fetch('/recipe/create/step4', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token
+                    },
+                    body: data
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        // If validation fails
+                        if (data.errors) {
+                            showErrors('image', data, 'input', true)
+                        }
+
+                        if (data == "success") {
+                            hideErrors('image', 'input', true)
+                            myForm.submit()
+
+
+                        }
+                    })
+                showStep()
+            }
         }
 
         const prevStep = (e) => {
@@ -299,9 +420,40 @@
             ingredientRow.parentNode.append(row)
         }
 
+        const addRowStep = (e) => {
+            e.preventDefault()
+            const row = stepRow.cloneNode(true)
+            row.querySelector('textarea').value = ""
+            addStepButton.insertAdjacentElement('beforebegin', row)
+
+            const rows = document.querySelectorAll('#step-row')
+
+            rows.forEach((value, key) => {
+                value.querySelector('#step-number').innerHTML = key + 1
+            })
+
+
+
+        }
+
+        const addImage = (e) => {
+            const $this = e.currentTarget
+            const image = $this.previousElementSibling
+            const newImage = image.cloneNode(true)
+            newImage.querySelector('img').src = "{{ asset('/storage/images/default-upload-image.jpg') }}"
+
+            $this.insertAdjacentElement('beforebegin', newImage)
+
+            showImage()
+
+
+        }
+
         nextButton.addEventListener('click', nextStep)
         prevButton.addEventListener('click', prevStep)
         addButton.addEventListener('click', addRowIngredient)
+        addStepButton.addEventListener('click', addRowStep)
+        addImageButton.addEventListener('click', addImage)
 
     </script>
 @endsection
