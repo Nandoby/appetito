@@ -4,7 +4,7 @@
 
 @section('content')
     <section id="profile">
-        <div class="background-profile" style="background: url('{{ asset('storage/images/background-profile.jpg') }}')"></div>
+        <div class="background-profile" style="background: url('{{ asset('storage/images/background-profile.jpg') }}');background-size:cover;background-position:center"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
