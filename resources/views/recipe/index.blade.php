@@ -126,7 +126,10 @@
             </div>
 
             @auth()
-                @if (Auth::user()->email_verified_at)
+
+                @if ($recipe->user != Auth::user())
+
+                    @if (Auth::user()->email_verified_at)
                     <section id="add-comment">
                         <div class="container">
                             <h5>Ajouter un commentaire</h5>
@@ -172,6 +175,8 @@
                         </div>
 
                     </div>
+                @endif
+
                 @endif
 
             @endauth

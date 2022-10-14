@@ -24,7 +24,7 @@
                         <i class="profile-chevron fa-regular fa-chevron-down"></i>
                         <span class="ml-2">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         <ul class="submenu">
-                            <li><a href="#"><i class="fa-solid fa-user"></i>Voir profil</a></li>
+                            <li><a href="{{ route('profile') }}"><i class="fa-solid fa-user"></i>Voir profil</a></li>
                             <li><a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
 
                         </ul>

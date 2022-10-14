@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeasonsController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
@@ -85,3 +86,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Demande de verification envoyée');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+/** Profile */
+Route::get('/profile', [UserController::class, 'profile'])
+    ->middleware(['auth', 'verified'])
+    ->name('profile')
+;
