@@ -44,11 +44,14 @@
                 <div class="images-container">
                     <img src="{{ str_contains($recipeImg, 'https') ? $recipeImg : asset('storage/images/'.$recipeImg)}}"
                          alt="{{ $recipe->title }}">
+
+                    @if ($recipe->images->count() > 1)
                     <div class="thumbs">
-                        @foreach ($recipe->images as $image)
-                            <img src="{{ $image->path }}" alt="{{ $image->imageable->title }}">
-                        @endforeach
+                            @foreach ($recipe->images as $image)
+                                <img src="{{ str_contains($image->path,'http') ? $image->path : asset('storage/images/'.$image->path) }}" alt="{{ $image->imageable->title }}">
+                            @endforeach
                     </div>
+                    @endif
                 </div>
             </div>
 

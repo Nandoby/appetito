@@ -11,6 +11,10 @@ class Food extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     /**
      * Get the food's image
      */

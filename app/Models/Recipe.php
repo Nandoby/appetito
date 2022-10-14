@@ -76,6 +76,14 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
+
+    /**
+     * Permet d'afficher le temps de préparation en heures et en minutes
+     * (dans la base de données tout est stocké en secondes)
+     *
+     * @param $value
+     * @return string
+     */
     public function getTimeAttribute($value): string
     {
         $seconds = $value;
@@ -83,6 +91,11 @@ class Recipe extends Model
         $seconds = round($seconds);
         $output = str_replace('00 h','',sprintf('%02d h %02d m', ($seconds/3600), ($seconds/ 60 % 60)));
         return $output;
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = ucfirst($value);
     }
 
     public function averageRatings(): string

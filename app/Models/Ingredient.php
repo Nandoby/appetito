@@ -11,6 +11,10 @@ class Ingredient extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'quantity'
+    ];
+
     /**
      * Get the ingredient's foods
      *
@@ -29,5 +33,10 @@ class Ingredient extends Model
     public function mesure(): BelongsTo
     {
         return $this->belongsTo(Mesure::class);
+    }
+
+    public function recipe(): BelongsTo
+    {
+        return $this->belongsTo(Recipe::class);
     }
 }

@@ -98,7 +98,7 @@
                     <div class="card">
                         <a href="{{ route('recipes.index', [ 'slug' => $recipe->slug ]) }}">
                             <div class="card-img-container">
-                                <img class="card-img" src="{{ $recipe->images->first()->path }}" alt="recette">
+                                <img class="card-img" src="{{ str_contains($recipe->images->first()->path, 'http') ? $recipe->images->first()->path : asset('storage/images/'.$recipe->images->first()->path) }}" alt="recette">
                             </div>
                             <div class="card-body">
                                 <h6>{{ $recipe->category->name }}</h6>
