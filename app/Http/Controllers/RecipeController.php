@@ -254,6 +254,8 @@ class RecipeController extends Controller
         $foods = Food::all();
         $mesures = Mesure::all();
 
+        Session::put('recipe', $recipe);
+
         if (Auth::user() != $recipe->user) {
             return back();
         }
@@ -270,6 +272,66 @@ class RecipeController extends Controller
 
     public function editStore(Request $request)
     {
-        dd($request->all());
+
+        $user = Auth::user();
+        $title = $request->input('title');
+        $time = $request->input('time');
+        $categoryId = $request->input('category');
+        $difficultyId = $request->input('difficulty');
+        $seasonId = $request->input('season');
+        $foodsArray = $request->input('foods');
+        $quantityArray = $request->input('quantity');
+        $mesureArray = $request->input('mesure');
+        $steps = $request->input('steps');
+        $ingredientsArray = [];
+
+        // Convertir le temps en secondes
+        $timeSplit = explode(':', $time);
+        $hours = $timeSplit[0];
+        $minutes = $timeSplit[1];
+        $secondes = $hours * 3600 + $minutes * 60;
+
+        foreach($foodsArray as $key => $value) {
+            $ingredientsArray[] = [
+                'food' => $foodsArray[$key],
+                'quantity' => $quantityArray[$key],
+                'mesure' => $mesureArray[$key]
+            ];
+        }
+
+        $recipe = Session::get('recipe');
+        $recipe->title = $title;
+        $recipe->slug = Str::slug($title,'-');
+        $recipe->time = $secondes;
+        $recipe->ingredients()->delete();
+        $recipe->steps()->delete();
+        $recipe->category()->associate($categoryId);
+        $recipe->difficulty()->associate($difficultyId);
+        $recipe->season()->associate($seasonId);
+        $recipe->user()->associate($user);
+        $recipe->save();
+
+        foreach($ingredientsArray as $ingred) {
+
+            $food = Food::find($ingred['food']);
+            $mesure = Mesure::find($ingred['mesure']);
+
+            $ingredient = new Ingredient();
+            $ingredient->quantity = $ingred['quantity'];
+            $ingredient->recipe()->associate($recipe);
+            $ingredient->mesure()->associate($mesure);
+            $ingredient->save();
+            $ingredient->foods()->save($food);
+        }
+
+        foreach ($steps as $s) {
+            $step = new Step();
+            $step->content = $s;
+            $recipe->steps()->save($step);
+        }
+
+        return redirect()->back()->with('success', 'Votre modification a bien été enregistrée');
+
+
     }
 }

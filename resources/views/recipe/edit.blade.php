@@ -15,6 +15,11 @@
                         </span>
                     </div>
                 </div>
+                @if (Session::has('success'))
+                    <div class="alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
                 <div class="col-12">
                     <h4 class="mb-3 mt-3">Edition de la recette &laquo; {{ $recipe->title }} &raquo;</h4>
                     <form class="form-recipe-edit" method="POST" action="{{ route('recipe.editStore') }}">
@@ -55,6 +60,7 @@
                             <h5 class="form-recipe-edit__heading">
                                 Ingrédients
                             </h5>
+
                             @foreach ($recipe->ingredients as $key => $ingredient)
                                 <div class="col-12 mb-3">
                                     <div class="row">
