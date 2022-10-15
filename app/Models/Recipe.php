@@ -93,6 +93,25 @@ class Recipe extends Model
         return $output;
     }
 
+    public function timeEdit()
+    {
+        $time = $this->time;
+        $time = str_replace(' ', '', $time);
+
+        if (strlen($time) < 5) {
+
+            $time = str_replace('m','', $time);
+
+            $time = '00:'.$time;
+
+            return $time;
+        }
+
+        $time = str_replace([' ','h','m'],['',':',''] ,$this->time);
+
+        return $time;
+    }
+
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = ucfirst($value);

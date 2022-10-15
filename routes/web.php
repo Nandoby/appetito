@@ -54,6 +54,11 @@ Route::post('/recipe/create/step2', [RecipeController::class, 'validateAjax2'])-
 Route::post('/recipe/create/step3', [RecipeController::class, 'validateAjax3'])->name('recipe.validateAjax3');
 Route::post('/recipe/create/step4', [RecipeController::class, 'validateAjax4'])->name('recipe.validateAjax4');
 Route::post('/recipe/store', [RecipeController::class, 'store'])->name('recipe.store');
+Route::post('/recipe/delete', [RecipeController::class, 'delete'])->name('recipe.delete');
+Route::get('/recipe/edit/{id}', [RecipeController::class, 'edit'])
+    ->name('recipe.edit')
+    ->middleware(['auth', 'verified']);
+Route::post('/recipe/edit/store', [RecipeController::class, 'editStore'])->name('recipe.editStore');
 
 /* Search  */
 Route::get('/search', [SearchController::class, 'search'])->name('recipes.search');

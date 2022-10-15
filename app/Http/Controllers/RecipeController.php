@@ -222,13 +222,54 @@ class RecipeController extends Controller
             return redirect()->route('home');
         }
 
+    }
+
+    public function delete(Request $request)
+    {
+
+        $recipe = Recipe::find($request->input('recipe'));
+
+        if (Auth::user() == $recipe->user) {
+
+            $recipe->ingredients()->delete();
+            $recipe->steps()->delete();
+            $recipe->comments()->delete();
+            $recipe->delete();
 
 
+            return response()->json([
+                'recipe' => $recipe
+            ]);
+        } else {
+            return response()->json('owner');
+        }
+    }
 
+    public function edit($id)
+    {
+        $recipe = Recipe::find($id);
+        $categories = Category::all();
+        $difficulties = Difficulty::all();
+        $seasons = Season::all();
+        $foods = Food::all();
+        $mesures = Mesure::all();
 
+        if (Auth::user() != $recipe->user) {
+            return back();
+        }
 
+        return view('recipe.edit', [
+            'recipe' => $recipe,
+            'categories' => $categories,
+            'difficulties' => $difficulties,
+            'seasons' => $seasons,
+            'foods' => $foods,
+            'mesures' => $mesures,
+        ]);
+    }
 
-
-
+    public function editStore(Request $request)
+    {
+        dd($request->all());
     }
 }
