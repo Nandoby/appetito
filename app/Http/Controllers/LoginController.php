@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\File;
 use Illuminate\View\View;
 use Nette\Utils\Image;
 
@@ -64,7 +65,7 @@ class LoginController extends Controller
             'email' => ['required', 'email', 'unique:App\Models\User,email'],
             'password' => ['required', 'min:8'],
             'passwordConfirm' => ['required', 'same:password'],
-            'picture' => ['mimes:jpg,png,svg']
+            'picture' => ['mimes:jpg,png,svg', File::image()->max('2000')]
         ];
 
         $passwordHashed = Hash::make($request->input('password'));

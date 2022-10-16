@@ -119,3 +119,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/admin/ingredients/{food}', [AdminController::class, 'ingredientDestroy'])->name('admin.ingredients.destroy');
 
 });
+
+Route::get('/cgu', function() {
+    return view('cgu.index');
+})->name('cgu');
+
+Route::get('/privacy', function () {
+    return view('privacy.index');
+})->name('privacy');

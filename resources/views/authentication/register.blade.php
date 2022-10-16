@@ -43,6 +43,7 @@
                             <label for="picture">Avatar</label>
                             <input class="@error('picture')is-invalid @enderror" type="file" id="picture" name="picture" />
                             <span class="info">* Si aucun avatar n'est uploadé, un avatar par défaut sera attribué</span>
+                            @error('picture') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <button type="submit">Inscription</button>
                     </form>

@@ -247,6 +247,8 @@ class RecipeController extends Controller
 
     public function edit($id)
     {
+
+
         $recipe = Recipe::find($id);
         $categories = Category::all();
         $difficulties = Difficulty::all();
@@ -272,6 +274,12 @@ class RecipeController extends Controller
 
     public function editStore(Request $request)
     {
+
+        $rules = [
+            'steps.*' => 'required'
+        ];
+
+        $validated = $request->validate($rules);
 
         $user = Auth::user();
         $title = $request->input('title');

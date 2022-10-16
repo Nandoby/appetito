@@ -91,7 +91,7 @@ return [
         'string' => 'Veuillez introduire maximum :max caractères',
     ],
     'max_digits' => 'The :attribute must not have more than :max digits.',
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => 'Le fichier doit être de type :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'array' => 'The :attribute must have at least :min items.',
