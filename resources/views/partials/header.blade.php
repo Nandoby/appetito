@@ -48,6 +48,7 @@
             @guest()
                 <li class="auth-media__link"><a href="{{ route('login') }}"><i class="fa-regular fa-user-lock"></i>Connexion</a></li>
                 <li class="auth-media__link"><a href="{{ route('register') }}"><i class="fa-solid fa-pen-to-square"></i>Inscription</a></li>
+
             @endguest
             @auth()
                 <li class="auth">
@@ -63,6 +64,12 @@
                 </li>
             @endauth
         </ul>
+        <form action="{{ route('recipes.search') }}" method="GET">
+            <input autocomplete="off" type="search" name="recipe"
+                   placeholder="Recherche des recettes ou ingrédients ..."
+                   value="{{ isset($request) ? $request->input('recipe') : '' }}"/>
+            <button type="submit"><i class="fa-regular fa-magnifying-glass"></i></button>
+        </form>
     </div>
 
 </div>
@@ -72,10 +79,10 @@
         <div class="container">
             <ul>
                 <li class="mr-4">
-                    <a href="/"><i class="fa-solid fa-house icon-color mr-1"></i> Accueil</a>
+                    <a href="/"><i class="fa-solid fa-house icon-color mr-1"></i> <span>Accueil</span></a>
                 </li>
                 <li class="mr-4">
-                    <a href="#"><i class="fa-solid fa-book-open icon-color mr-1"></i> Recettes</a><i
+                    <a href="#"><i class="fa-solid fa-book-open icon-color mr-1"></i><span>Recettes</span></a><i
                         class="fa-solid fa-chevron-down text-red ml-2"></i>
                     <ul>
                         <li><a href="{{ route('categories.index') }}">Par Catégorie</a></li>
@@ -84,7 +91,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-solid fa-carrot icon-color mr-1"></i>Ingrédients</a><i
+                    <a href="#"><i class="fa-solid fa-carrot icon-color mr-1"></i><span>Ingrédients</span></a><i
                         class="fa-solid fa-chevron-down text-red ml-2"></i>
                     <ul>
                         <li><a href="{{ route('ingredients.index') }}">Par ordre alphabétique</a></li>

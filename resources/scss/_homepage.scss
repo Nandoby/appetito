@@ -186,9 +186,20 @@ header {
             li {
                 display: flex;
                 align-items: center;
+
+                @media(max-width:379px) {
+                    margin-right: 40px;
+                }
+
                 a {
                     display: block;
                     padding: 1rem 0 1rem 0;
+
+                    @media(max-width:379px) {
+                        > span {
+                            display: none;
+                        }
+                    }
 
                 }
                 &:hover ul {

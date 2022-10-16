@@ -411,6 +411,37 @@ p {
                 }
             }
         }
+
+
+    }
+
+    form {
+        width: 100%;
+        margin-top: 24px;
+        display: flex;
+
+        @media(min-width:577px) {
+            display: none;
+        }
+
+        input {
+            flex: 0 1 90%;
+            width: 90%;
+            height: 40px;
+            border: 1px solid $gray-500;
+            border-right: 0;
+            padding: 1rem;
+            font-size: 18px;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        [type="submit"] {
+            flex: 0 1 10%;
+            width: 10%;
+            height: 40px;
+            background: $primary;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
     }
 
 
