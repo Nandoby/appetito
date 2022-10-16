@@ -11,6 +11,7 @@ use App\Models\Recipe;
 use App\Models\Step;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
+
+
         $this->call([
             CategorySeeder::class,
             FoodSeeder::class,
@@ -36,6 +39,15 @@ class DatabaseSeeder extends Seeder
             SeasonSeeder::class,
             DifficultySeeder::class
         ]);
+
+        $admin = new User();
+        $admin->firstname = "Ferdinando";
+        $admin->lastname = "Biaccalli";
+        $admin->email = 'nandobiaccalli@gmail.com';
+        $admin->email_verified_at = new \DateTime();
+        $admin->password = Hash::make('password');
+        $admin->is_admin = true;
+        $admin->save();
 
         User::factory()
             ->count(10)
