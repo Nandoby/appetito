@@ -3,8 +3,10 @@
     overflow-x: hidden;
 
     .left-column {
-        min-height: 100vh;
         background-color: $gray-200;
+
+        @media (max-width: 991px) {
+        }
 
         .left-column__heading {
             font-family: "italianno", cursive;
@@ -35,6 +37,11 @@
 
         .navigation {
             margin-top: 2rem;
+
+            @media (max-width: 991px) {
+                display: flex;
+                flex-wrap: wrap;
+            }
 
             .navigation__item {
                 padding: 1rem;

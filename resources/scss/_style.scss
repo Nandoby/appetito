@@ -350,3 +350,70 @@ p {
     padding: 1rem;
     margin-top: 1rem;
 }
+
+#media-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    background-color: $gray-200;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    transition: left 300ms ease-in-out;
+
+    @media (min-width:992px) {
+        display: none;
+    }
+
+    .close-button {
+        float: right;
+        text-align: right;
+        margin-top: 1rem;
+        font-size: 40px;
+
+        &:focus {
+            color: $gray-500;
+        }
+
+    }
+
+    #auth-media {
+        clear: both;
+
+        .auth-media__link {
+            margin: 1rem 0;
+            font-size: 20px;
+
+            a {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+
+                i {
+                    color: darken($primary,10);
+                }
+            }
+        }
+
+        .auth {
+            flex-direction: column;
+
+            ul {
+                margin-top: 1rem;
+            }
+
+            li {
+                margin: 1rem 0;
+
+                a {
+                    display: flex;
+                    gap: 8px;
+                }
+            }
+        }
+    }
+
+
+
+}
+

@@ -20,23 +20,53 @@
                 @endguest
                 @auth()
                     <li class="auth">
-                        <img class="picture" src="{{ str_contains(Auth::user()->picture, 'http') ? Auth::user()->picture : asset('storage/images/'.Auth::user()->picture) }}">
+                        <img class="picture"
+                             src="{{ str_contains(Auth::user()->picture, 'http') ? Auth::user()->picture : asset('storage/images/'.Auth::user()->picture) }}">
                         <i class="profile-chevron fa-regular fa-chevron-down"></i>
                         <span class="ml-2">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         <ul class="submenu">
                             <li><a href="{{ route('profile') }}"><i class="fa-solid fa-user"></i>Voir profil</a></li>
-                            <li><a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a></li>
+                            <li><a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>
+                                    Déconnexion</a></li>
 
                         </ul>
                     </li>
                 @endauth()
-                <li><a class="flag" href="#"><img src="{{ asset("icons/flag-FR.svg") }}" alt="Français"></a></li>
-                <li><a class="flag" href="#"><img src={{ asset("icons/flag-IT.svg") }} alt="Italiano"></a></li>
             </ul>
             <i id="menu-bars" class="fa-solid fa-bars"></i>
         </nav>
     </div>
 </header>
+
+<div id="media-menu">
+    <div class="container">
+        <span class="close-button">
+            <i class="fa-solid fa-xmark"></i>
+        </span>
+
+        <ul id="auth-media">
+            @guest()
+                <li class="auth-media__link"><a href="{{ route('login') }}"><i class="fa-regular fa-user-lock"></i>Connexion</a></li>
+                <li class="auth-media__link"><a href="{{ route('register') }}"><i class="fa-solid fa-pen-to-square"></i>Inscription</a></li>
+            @endguest
+            @auth()
+                <li class="auth">
+                    <img class="picture"
+                         src="{{ str_contains(Auth::user()->picture, 'http') ? Auth::user()->picture : asset('storage/images/'.Auth::user()->picture) }}">
+                    <span class="ml-2 mt-2">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
+                    <ul>
+                        <li><a href="{{ route('profile') }}"><i class="fa-solid fa-user"></i>Voir profil</a></li>
+                        <li><a href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>
+                                Déconnexion</a></li>
+
+                    </ul>
+                </li>
+            @endauth
+        </ul>
+    </div>
+
+</div>
+
 <div id="nav-secondary">
     <nav>
         <div class="container">
@@ -45,7 +75,8 @@
                     <a href="/"><i class="fa-solid fa-house icon-color mr-1"></i> Accueil</a>
                 </li>
                 <li class="mr-4">
-                    <a href="#"><i class="fa-solid fa-book-open icon-color mr-1"></i> Recettes</a><i class="fa-solid fa-chevron-down text-red ml-2"></i>
+                    <a href="#"><i class="fa-solid fa-book-open icon-color mr-1"></i> Recettes</a><i
+                        class="fa-solid fa-chevron-down text-red ml-2"></i>
                     <ul>
                         <li><a href="{{ route('categories.index') }}">Par Catégorie</a></li>
                         <li><a href="{{ route('seasons.index') }}">Par Saison</a></li>
@@ -53,7 +84,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa-solid fa-carrot icon-color mr-1"></i>Ingrédients</a><i class="fa-solid fa-chevron-down text-red ml-2"></i>
+                    <a href="#"><i class="fa-solid fa-carrot icon-color mr-1"></i>Ingrédients</a><i
+                        class="fa-solid fa-chevron-down text-red ml-2"></i>
                     <ul>
                         <li><a href="{{ route('ingredients.index') }}">Par ordre alphabétique</a></li>
                     </ul>

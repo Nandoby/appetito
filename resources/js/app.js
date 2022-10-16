@@ -2,6 +2,21 @@ import './bootstrap';
 import Glide from "@glidejs/glide";
 
 const divGlide = document.querySelector('.glide');
+const mediaMenu = document.querySelector('#media-menu')
+const menuBtn = document.querySelector('#menu-bars')
+const closeBtn = document.querySelector('.close-button')
+
+const showMediaMenu = () => {
+    mediaMenu.style.left = 0;
+}
+
+const hideMediaMenu = () => {
+    mediaMenu.style.left = '-100%'
+}
+
+menuBtn.addEventListener('click', showMediaMenu)
+closeBtn.addEventListener('click', hideMediaMenu)
+
 
 if (divGlide !== null) {
 
