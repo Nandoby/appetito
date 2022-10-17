@@ -275,8 +275,48 @@ class RecipeController extends Controller
     public function editStore(Request $request)
     {
 
+        $mesures = Mesure::all();
+        $foods = Food::all();
+        $categories = Category::all();
+        $seasons = Season::all();
+        $difficulties = Difficulty::all();
+
+        $mesuresID = [];
+        $foodsID = [];
+        $categoriesID = [];
+        $seasonsID = [];
+        $difficultiesID = [];
+
+        foreach($mesures as $mesure) {
+            $mesuresID[] = $mesure->id;
+        }
+
+        foreach($foods as $food) {
+            $foodsID[] = $food->id;
+        }
+
+        foreach($categories as $category) {
+            $categoriesID[] = $category->id;
+        }
+
+        foreach($seasons as $season) {
+            $seasonsID[] = $season->id;
+        }
+
+        foreach($difficulties as $difficulty) {
+            $difficultiesID[] = $difficulty->id;
+        }
+
         $rules = [
-            'steps.*' => 'required'
+            'steps.*' => 'required',
+            'title' => 'required',
+            'category' => ['required', Rule::in($categoriesID)],
+            'quantity.*' => 'required',
+            'season' => ['required', Rule::in($seasonsID[])],
+            'foods.*' => ['required', Rule::in($foodsID)],
+            'mesure.*' => ['required', Rule::in($mesuresID)],
+            'time' => 'required',
+            'difficulty' => ['required', Rule::in($difficultiesID)]
         ];
 
         $validated = $request->validate($rules);
